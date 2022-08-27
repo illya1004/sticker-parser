@@ -10,8 +10,7 @@ if os.path.exists("stiker download") == False:
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0', 'accept': '*/*'}
 extractor = URLExtract()
 url = input("Отправьте ссылку: ")
-#https://store.line.me/emojishop/product/60f7bab1b99b030cdf726120/en
-
+# https://store.line.me/stickershop/product/20176523/en
 
 def get_html(url, params=None):
 	r = requests.get(url, headers=HEADERS, params=params)
@@ -42,8 +41,12 @@ def changeCar(ch,ca1,ca2):
             b+=ca2
     return b
 
-url_file = soup.find('p', {"data-test": "emoji-name-title"}).text
+try:
+	url_file = soup.find('p', {"data-test": "emoji-name-title"}).text
+except:
+	url_file = soup.find('p', {"data-test": "sticker-name-title"}).text
 url_file = changeCar(url_file, ".", "")
+url_file = changeCar(url_file, ":", "")
 url_file = changeCar(url_file, "/", "")
 url_file = changeCar(url_file, "-", "")
 
@@ -55,6 +58,6 @@ for item in items:
 	for url2 in extractor.gen_urls(style):
 
 		print (url2)
-		urllib.request.urlretrieve(url2, f"stiker download/{url_file}/{number_file}.jpg")
+		urllib.request.urlretrieve(url2, f"stiker download/{url_file}/{number_file}.png")
 		
 		number_file += 1
