@@ -10,6 +10,8 @@ if os.path.exists("stiker download") == False:
 HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0', 'accept': '*/*'}
 extractor = URLExtract()
 url = input("Отправьте ссылку: ")
+#https://store.line.me/emojishop/product/60f7bab1b99b030cdf726120/en
+
 
 def get_html(url, params=None):
 	r = requests.get(url, headers=HEADERS, params=params)
